@@ -3,7 +3,7 @@ from . import browsers, generic, utils  # noqa: F401
 __version__ = "0.4.1"
 
 
-def get_history():
+def get_history(homedir=None):
     """This method is used to obtain browser histories of all available and
     supported browsers for the system platform.
 
@@ -17,7 +17,7 @@ def get_history():
     browser_classes = utils.get_browsers()
     for browser_class in browser_classes:
         try:
-            browser_object = browser_class()
+            browser_object = browser_class(homedir=homedir)
             browser_output_object = browser_object.fetch_history()
             output_object.histories.extend(browser_output_object.histories)
         except AssertionError:

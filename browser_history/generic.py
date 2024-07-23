@@ -124,11 +124,12 @@ class Browser(abc.ABC):
             .. _datetime: https://www.sqlitetutorial.net/sqlite-date-functions/sqlite-datetime-function/
         """  # pylint: disable=line-too-long # noqa: E501
 
-    def __init__(self, plat: typing.Optional[utils.Platform] = None):
+    def __init__(self, plat: typing.Optional[utils.Platform] = None, homedir=None):
         self.profile_dir_prefixes = []
         if plat is None:
             plat = utils.get_platform()
-        homedir = Path.home()
+        if not homedir:
+            homedir =  Path.home()
 
         error_string = (
             f"{self.name} browser is not supported on {utils.get_platform_name(plat)}"
