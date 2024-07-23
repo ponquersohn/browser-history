@@ -128,8 +128,11 @@ class Browser(abc.ABC):
         self.profile_dir_prefixes = []
         if plat is None:
             plat = utils.get_platform()
-        if not homedir:
+        if homedir:
+            homedir = Path(homedir)
+        else:
             homedir =  Path.home()
+        
 
         error_string = (
             f"{self.name} browser is not supported on {utils.get_platform_name(plat)}"
